@@ -1,0 +1,31 @@
+{
+  "name": "visitor-log",
+  "version": "0.0.1",
+  "description": "This project is the California Department of Technology's Visitor Log application.",
+  "main": "index.js",
+  "engines": {
+    "npm": ">=5",
+    "node": ">=8.15.1"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/install.js",
+    "start": "dotnet run -p ./server",
+    "build": "node ./scripts/build.js",
+    "test": "node ./scripts/test.js",
+    "e2e": "echo TODO: end to end testing...",
+    "e2e:watch": "echo TODO: end to end testing..."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vollmerr/visitor-log.git"
+  },
+  "author": "Ryan Vollmer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vollmerr/visitor-log/issues"
+  },
+  "homepage": "https://github.com/vollmerr/visitor-log#readme",
+  "devDependencies": {
+    "chalk": "^2.4.2"
+  }
+}
