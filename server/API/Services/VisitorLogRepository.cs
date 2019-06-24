@@ -13,12 +13,16 @@ namespace API.Services {
       _context = context;
     }
 
-    public void AddCampus(Campus campus) {
+    public async Task AddCampus(Campus campus) {
       if (campus is null) {
         throw new ArgumentNullException(nameof(campus));
       }
 
-      _context.Add(campus);
+      await _context.AddAsync(campus);
+    }
+
+    public Task<bool> ExistsCampus(Guid campusId) {
+      throw new NotImplementedException();
     }
 
     public async Task<Campus> GetCampusByIdAsync(Guid campusId) {
@@ -27,10 +31,6 @@ namespace API.Services {
 
     public async Task<IEnumerable<Campus>> GetCampusesAsync() {
       return await _context.Campuses.ToListAsync();
-    }
-
-    public Task<CampusRoom> GetCampusRoomByIdAsync(Guid campusId, Guid roomId) {
-      throw new NotImplementedException();
     }
 
     public Task<IEnumerable<CampusRoom>> GetCampusRoomsAsync(Guid campusId) {

@@ -1,4 +1,5 @@
 using API.Dtos;
+using API.Entities;
 using API.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -18,24 +19,37 @@ namespace API.Controllers {
       _mapper = mapper;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetCampuses() {
-      var campusEnitities = await _repository.GetCampusesAsync();
-      var campuses = _mapper.Map<IEnumerable<CampusDto>>(campusEnitities);
-      return Ok(campuses);
+    [HttpPost]
+    public async Task<IActionResult> AddCampus(CampusForCreationDto campus) {
+      var campusEnitity = _mapper.Map<Campus>(campus);
+      await _repository.AddCampus(campusEnitity);
+
+      if (!await _repository.SaveAsync()) {
+        throw new Exception("Failed to add campus on save");
+      }
+
+      var campusToReturn = _mapper.Map<CampusDto>(campusEnitity);
+      return CreatedAtRoute("GetCampusById", new { campusId = campusToReturn.Id }, campusToReturn);
     }
 
     [HttpGet]
-    [Route("{id}")]
+    public async Task<IActionResult> GetCampuses() {
+      var campusEnitities = await _repository.GetCampusesAsync();
+      var campusesToReturn = _mapper.Map<IEnumerable<CampusDto>>(campusEnitities);
+      return Ok(campusesToReturn);
+    }
+
+    [HttpGet]
+    [Route("{campusId}", Name = "GetCampusById")]
     public async Task<IActionResult> GetCampusById(Guid campusId) {
       var campusEntity = await _repository.GetCampusByIdAsync(campusId);
 
-      if (campusEntity == null) {
+      if (campusEntity is null) {
         return NotFound();
       }
 
-      var campus = _mapper.Map<CampusDto>(campusEntity);
-      return Ok(campus);
+      var campusToReturn = _mapper.Map<CampusDto>(campusEntity);
+      return Ok(campusToReturn);
     }
   }
 }

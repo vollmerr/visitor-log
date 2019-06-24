@@ -25,54 +25,37 @@ namespace API.Tests {
       _controller = new CampusRoomController(_mockRepo.Object, _mapper);
     }
 
-    [Fact]
-    public async void GetCampuses_returns_200() {
+    [Theory, AutoData]
+    public async void GetCampusRooms_returns_Ok(Campus campus, List<CampusRoom> rooms) {
       // arrange
+      _mockRepo.Setup(x => x.GetCampusRoomsAsync(campus.Id)).ReturnsAsync(rooms);
+      _mockRepo.Setup(x => x.ExistsCampus(campus.Id)).ReturnsAsync(true);
       // act
-      var result = await _controller.GetCampuses();
+      var result = await _controller.GetCampusRooms(campus.Id);
       // assert
       Assert.IsType<OkObjectResult>(result);
     }
 
     [Theory, AutoData]
-    public async void GetCampuses_returns_CampusDtos(List<Campus> campuses) {
+    public async void GetCampusRooms_returns_NotFound(Campus campus) {
       // arrange
-      _mockRepo.Setup(x => x.GetCampusesAsync()).ReturnsAsync(campuses);
+      _mockRepo.Setup(x => x.ExistsCampus(campus.Id)).ReturnsAsync(false);
       // act
-      var result = await _controller.GetCampuses() as OkObjectResult;
-      // assert
-      Assert.NotNull(result.Value);
-      Assert.IsType<List<CampusDto>>(result.Value);
-    }
-
-    [Theory, AutoData]
-    public async void GetCampus_returns_200(Campus campus) {
-      // arrange
-      _mockRepo.Setup(x => x.GetCampusByIdAsync(campus.Id)).ReturnsAsync(campus);
-      // act
-      var result = await _controller.GetCampusById(campus.Id);
-      // assert
-      Assert.IsType<OkObjectResult>(result);
-    }
-
-    [Theory, AutoData]
-    public async void GetCampus_returns_404(Campus campus) {
-      // arrange
-      // act
-      var result = await _controller.GetCampusById(campus.Id);
+      var result = await _controller.GetCampusRooms(campus.Id);
       // assert
       Assert.IsType<NotFoundResult>(result);
     }
 
     [Theory, AutoData]
-    public async void GetCampus_returns_CampusDto(Campus campus) {
+    public async void GetCampusRooms_returns_CampusRoomDtos(Campus campus, List<CampusRoom> rooms) {
       // arrange
-      _mockRepo.Setup(x => x.GetCampusByIdAsync(campus.Id)).ReturnsAsync(campus);
+      _mockRepo.Setup(x => x.GetCampusRoomsAsync(campus.Id)).ReturnsAsync(rooms);
+      _mockRepo.Setup(x => x.ExistsCampus(campus.Id)).ReturnsAsync(true);
       // act
-      var result = await _controller.GetCampusById(campus.Id) as OkObjectResult;
+      var result = await _controller.GetCampusRooms(campus.Id) as OkObjectResult;
       // assert
       Assert.NotNull(result.Value);
-      Assert.IsType<CampusDto>(result.Value);
+      Assert.IsType<List<CampusRoomDto>>(result.Value);
     }
   }
 }

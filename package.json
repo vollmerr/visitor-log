@@ -9,7 +9,7 @@
   },
   "scripts": {
     "postinstall": "node ./scripts/install.js",
-    "start": "dotnet run -p ./API",
+    "start": "dotnet run -p ./server/API",
     "build": "node ./scripts/build.js",
     "test": "node ./scripts/test.js",
     "e2e": "echo TODO: end to end testing...",

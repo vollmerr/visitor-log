@@ -22,7 +22,7 @@ namespace API {
 
       // In production, the React files will be served from this directory
       services.AddSpaStaticFiles(configuration => {
-        configuration.RootPath = "../client/build";
+        configuration.RootPath = "../../client/build";
       });
 
       var connectionString = Configuration["ConnectionStrings:VisitorLogDB"];
@@ -56,7 +56,7 @@ namespace API {
       });
 
       app.UseSpa(spa => {
-        spa.Options.SourcePath = "../client";
+        spa.Options.SourcePath = "../../client";
 
         if (env.IsDevelopment()) {
           spa.UseReactDevelopmentServer(npmScript: "start:local");

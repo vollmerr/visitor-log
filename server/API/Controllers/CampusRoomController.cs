@@ -20,22 +20,13 @@ namespace API.Controllers {
 
     [HttpGet]
     public async Task<IActionResult> GetCampusRooms(Guid campusId) {
-      var roomEnitities = await _repository.GetCampusRoomsAsync(campusId);
-      var rooms = _mapper.Map<IEnumerable<CampusRoomDto>>(roomEnitities);
-      return Ok(rooms);
-    }
-
-    [HttpGet]
-    [Route("{id}")]
-    public async Task<IActionResult> GetCampusRoomById(Guid campusId, Guid roomId) {
-      var roomEntity = await _repository.GetCampusRoomByIdAsync(campusId, roomId);
-
-      if (roomEntity == null) {
+      if (!await _repository.ExistsCampus(campusId)) {
         return NotFound();
       }
 
-      var room = _mapper.Map<CampusRoomDto>(roomEntity);
-      return Ok(room);
+      var roomEnitities = await _repository.GetCampusRoomsAsync(campusId);
+      var roomsToReturn = _mapper.Map<IEnumerable<CampusRoomDto>>(roomEnitities);
+      return Ok(roomsToReturn);
     }
   }
 }

@@ -6,6 +6,8 @@ namespace API.Profiles {
   public class CampusProfile : Profile {
     public CampusProfile() {
       CreateMap<Campus, CampusDto>();
+      CreateMap<CampusForCreationDto, Campus>();
+
       CreateMap<CampusRoom, CampusRoomDto>();
     }
   }
