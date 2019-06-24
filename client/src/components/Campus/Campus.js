@@ -7,6 +7,8 @@ import { ConnectedAsync } from 'state-template';
 import * as actions from './actions';
 import * as selectors from './selectors';
 
+import CampusRooms from './CampusRooms';
+
 export class Campus extends React.Component {
   componentDidMount() {
     this.loadCampuses();
@@ -21,10 +23,12 @@ export class Campus extends React.Component {
 
   render() {
     const { campuses } = this.props;
-
+    console.log('Object.keys(campuses)', campuses);
     return (
       <ConnectedAsync>
         <pre>{JSON.stringify(campuses, null, 2)}</pre>
+
+        {campuses.length && <CampusRooms campusId={campuses[0].id} />}
       </ConnectedAsync>
     );
   }

@@ -21,20 +21,20 @@ namespace API.Services {
       await _context.AddAsync(campus);
     }
 
-    public Task<bool> ExistsCampus(Guid campusId) {
-      throw new NotImplementedException();
+    public async Task<bool> ExistsCampus(Guid campusId) {
+      return await _context.Campuses.AnyAsync(x => x.Id == campusId);
     }
 
     public async Task<Campus> GetCampusByIdAsync(Guid campusId) {
-      return await _context.Campuses.Where(x => x.Id == campusId).FirstOrDefaultAsync();
+      return await _context.Campuses.Where(x => x.Id == campusId).Include("Rooms").FirstOrDefaultAsync();
     }
 
     public async Task<IEnumerable<Campus>> GetCampusesAsync() {
-      return await _context.Campuses.ToListAsync();
+      return await _context.Campuses.Include("Rooms").ToListAsync();
     }
 
-    public Task<IEnumerable<CampusRoom>> GetCampusRoomsAsync(Guid campusId) {
-      throw new NotImplementedException();
+    public async Task<IEnumerable<CampusRoom>> GetCampusRoomsAsync(Guid campusId) {
+       return await _context.CampusRooms.Where(x => x.CampusId == campusId).ToListAsync();
     }
 
     public async Task<bool> SaveAsync() {
