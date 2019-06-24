@@ -1,5 +1,6 @@
-import Home from '../Home';
-import Help from '../Help';
+import HomePage from '../HomePage';
+import HelpPage from '../HelpPage';
+import AdminPage from '../AdminPage';
 
 // order here determines order in navigation menu
 export const routesByKey = {
@@ -9,7 +10,7 @@ export const routesByKey = {
     path: '/',
     exact: true,
     icon: 'ca-gov-icon-home',
-    component: Home,
+    component: HomePage,
   },
   help: {
     key: 'help',
@@ -17,7 +18,14 @@ export const routesByKey = {
     path: '/help',
     exact: true,
     icon: 'ca-gov-icon-question-line',
-    component: Help,
+    component: HelpPage,
+  },
+  admin: {
+    key: 'admin',
+    name: 'Admin',
+    path: '/admin',
+    icon: 'ca-gov-icon-question-line',
+    component: AdminPage,
   },
 };
 

@@ -28,13 +28,13 @@ export class Home extends React.Component {
     return (
       <Page title={'Home'}>
         <ConnectedAsync>
-          <ul>
+          {/* <ul>
             {
               exampleData.map(x => (
                 <li key={x.id}>{JSON.stringify(x)}</li>
               ))
             }
-          </ul>
+          </ul> */}
         </ConnectedAsync>
       </Page>
     );

@@ -1,0 +1,2 @@
+export const GET_CAMPUSES = 'Campus/GET_CAMPUSES';
+export const GET_CAMPUSES_SUCCESS = 'Campus/GET_CAMPUSES_SUCCESS';

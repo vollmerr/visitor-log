@@ -1,6 +1,8 @@
 # visitor-log-client
 
 ## About
+This is the Client for the California Department of Technology's Visitor Log application.
+
 This project uses [create-react-app](https://github.com/facebook/create-react-app) as it's foundation, refer to their documentation for issues related to webpack/bundling, extending configurations, etc. 
 
 It also uses the [state-template](https://www.npmjs.com/package/state-template) package as the framework for building [CA State Template](http://template.webstandards.ca.gov/sample/) styled react websites, refer to their documentation for issues related to available components and requirements.

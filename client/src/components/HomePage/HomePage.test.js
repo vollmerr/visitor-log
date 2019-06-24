@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Home from './Home';
+import HomePage from './HomePage';
 
 const props = {};
 
 let wrapper;
-describe('Home', () => {
+describe('HomePage', () => {
   beforeEach(() => {
-    wrapper = shallow(<Home {...props} />);
+    wrapper = shallow(<HomePage {...props} />);
   });
 
   it('should render content', () => {

@@ -12,4 +12,4 @@ export {
   selectors,
 };
 
-export { default } from './Home';
+export { default } from './Campus';
