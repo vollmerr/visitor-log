@@ -7,5 +7,6 @@ namespace API.Dtos {
     public string Name { get; set; }
     public bool IsActive { get; set; }
     public IEnumerable<CampusRoomDto> Rooms { get; set; }
+    public IEnumerable<CampusAccessAreaDto> AccessAreas { get; set; }
   }
 }

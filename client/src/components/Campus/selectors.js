@@ -3,6 +3,7 @@ import { api } from 'state-template';
 
 export const selectCampus = state => state.campus;
 export const selectCampuses = state => selectCampus(state).campuses;
+export const selectCampusAccessAreas = state => selectCampus(state).accessAreas;
 export const selectCampusRooms = state => selectCampus(state).rooms;
 
 export const getCampuses = () => createSelector(
@@ -13,6 +14,13 @@ export const getCampuses = () => createSelector(
 export const getCampusById = campusId => createSelector(
   selectCampuses,
   campuses => campuses[campusId],
+);
+
+export const getCampusAccessAreas = campusId => createSelector(
+  [selectCampuses, selectCampusAccessAreas],
+  (campuses, accessAreas) => (
+    campuses[campusId].accessAreas.map(accessAreaId => accessAreas[accessAreaId])
+  ),
 );
 
 export const getCampusRooms = campusId => createSelector(

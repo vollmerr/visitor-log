@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities {
-  public class Campus {
+  public class CampusAccessArea {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
@@ -14,8 +13,9 @@ namespace API.Entities {
 
     public bool IsActive { get; set; } = true;
 
-    public IEnumerable<CampusRoom> Rooms { get; set; } = new List<CampusRoom>();
+    [ForeignKey("CampusId")]
+    public Campus Campus { get; set; }
 
-    public IEnumerable<CampusAccessArea> AccessAreas { get; set; } = new List<CampusAccessArea>();
+    public Guid CampusId { get; set; }
   }
 }

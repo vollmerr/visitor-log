@@ -6,14 +6,17 @@ import * as schema from './schema';
 
 export const initialState = {
   campuses: {},
+  accessAreas: {},
   rooms: {},
   lastFetched: null,
 };
 
 const getCampusesReducer = (state, action) => {
   const { entities } = normalize(action.payload, schema.campuses);
+
   return {
     campuses: entities.campuses,
+    accessAreas: entities.accessAreas,
     rooms: entities.rooms,
     lastFetched: Date.now(),
   };

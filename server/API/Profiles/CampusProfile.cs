@@ -9,6 +9,8 @@ namespace API.Profiles {
       CreateMap<CampusForCreationDto, Campus>();
 
       CreateMap<CampusRoom, CampusRoomDto>();
+
+      CreateMap<CampusAccessArea, CampusAccessAreaDto>();
     }
   }
 }

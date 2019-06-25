@@ -26,11 +26,12 @@ namespace API.Services {
     }
 
     public async Task<Campus> GetCampusByIdAsync(Guid campusId) {
-      return await _context.Campuses.Where(x => x.Id == campusId).Include("Rooms").FirstOrDefaultAsync();
+      return await _context.Campuses.Where(x => x.Id == campusId)
+        .Include("Rooms").Include("AccessAreas").FirstOrDefaultAsync();
     }
 
     public async Task<IEnumerable<Campus>> GetCampusesAsync() {
-      return await _context.Campuses.Include("Rooms").ToListAsync();
+      return await _context.Campuses.Include("Rooms").Include("AccessAreas").ToListAsync();
     }
 
     public async Task<IEnumerable<CampusRoom>> GetCampusRoomsAsync(Guid campusId) {
