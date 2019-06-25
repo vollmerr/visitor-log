@@ -9,7 +9,7 @@ import * as selectors from './selectors';
 export class CampusRooms extends React.Component {
   render() {
     const { rooms } = this.props;
-    console.log('props: ', this.props);
+
     return (
       <ConnectedAsync>
         <h2>ROOMS</h2>

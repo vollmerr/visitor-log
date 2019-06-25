@@ -10,16 +10,13 @@ import 'state-template/dist/style/core/css/cagov.core.min.css';
 import 'state-template/dist/style/core/css/colorscheme-oceanside.min.css';
 
 import App from './components/App';
-import { reducer as home, saga as homeSaga } from './components/HomePage';
 import { reducer as campus, saga as campusSaga } from './components/Campus';
 
 const reducers = {
-  home,
   campus,
 };
 
 const sagas = [
-  homeSaga,
   campusSaga,
 ];
 

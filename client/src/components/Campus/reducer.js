@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import { normalize } from 'normalizr';
 
 import * as C from './constants';
-import * as schema from './schema';
+import { campuses } from './entities';
 
 export const initialState = {
   campuses: {},
@@ -12,7 +12,7 @@ export const initialState = {
 };
 
 const getCampusesReducer = (state, action) => {
-  const { entities } = normalize(action.payload, schema.campuses);
+  const { entities } = normalize(action.payload, campuses);
 
   return {
     campuses: entities.campuses,
