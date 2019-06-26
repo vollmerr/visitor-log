@@ -4,6 +4,8 @@ import { normalize } from 'normalizr';
 import * as C from './constants';
 import { campuses } from './entities';
 
+import fakeCampuses from './fakeCampuses';
+
 export const initialState = {
   campuses: {},
   accessAreas: {},
@@ -12,7 +14,8 @@ export const initialState = {
 };
 
 const getCampusesReducer = (state, action) => {
-  const { entities } = normalize(action.payload, campuses);
+  const { entities } = normalize(fakeCampuses, campuses);
+  // const { entities } = normalize(action.payload, campuses);
 
   return {
     campuses: entities.campuses,

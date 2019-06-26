@@ -1,13 +1,14 @@
 import React from 'react';
 import { FieldArray } from 'redux-form';
 import {
-  FieldDate,
-  FieldInput,
-  FieldRadioButtons,
   Button,
+  FieldInput,
+  FieldSelect,
 } from 'state-template';
 
-// import schema from '../schema';
+import schema from '../Visits/schema';
+
+const { visitors } = schema;
 
 class Visitors extends React.Component {
   // attach array indexed name to field name (ex: orderDetails[1].quantity)
@@ -16,65 +17,62 @@ class Visitors extends React.Component {
     name: `${detail}.${values.name}`,
   })
 
-  renderDetails = ({ fields }) => {
+  renderVisitor = (fields, field, index) => {
+    const { disabled } = this.props;
+
+    return (
+      <li
+        key={`visitor-${index}`}
+        className={'row'}
+        data-testid={`visitor-${index}`}
+      >
+        <FieldInput {...this.withNamePrefix(field, visitors.visitorName)} className={'col-md-4'} disabled={disabled} />
+        <FieldSelect {...this.withNamePrefix(field, visitors.securedArea)} className={'col-md-3'} disabled={disabled} />
+        <FieldSelect {...this.withNamePrefix(field, visitors.badgeType)} className={'col-md-3'} disabled={disabled} />
+
+        {
+          !disabled && (
+            index === fields.length - 1 ? (
+              <div className={'col-md-2 d-flex align-items-center'}>
+                <Button
+                  text={'Add'}
+                  variant={'primary'}
+                  className={'w-100 d-print-none'}
+                  iconProps={{ name: 'plus-mark' }}
+                  onClick={() => fields.push({})}
+                />
+              </div>
+            ) : (
+              <div className={'col-md-2 d-flex align-items-center'}>
+                <Button
+                  text={'Remove'}
+                  variant={'default'}
+                  className={'w-100 d-print-none'}
+                  iconProps={{ name: 'close-line' }}
+                  onClick={() => fields.remove(index)}
+                />
+              </div>
+            )
+          )
+        }
+      </li>
+    );
+  }
+
+  renderVisitors = ({ fields }) => {
     if (!fields.length) {
       fields.push({});
     }
 
     return (
-      <div className={'row align-items-center'} role={'group'} aria-labelledby={'section7__header'}>
-        <h3 id={'section7__header'} className={'col-md-6'}>7. Order Detail</h3>
+      <div role={'group'} aria-labelledby={'visitors'}>
+        <h3 id={'visitors'}>Visitors</h3>
 
-        <div className={'col-md-6'}>
-          <Button
-            text={'Add Request'}
-            variant={'primary'}
-            className={'float-right d-print-none'}
-            iconProps={{ name: 'plus-line' }}
-            onClick={() => fields.push({})}
-          />
-        </div>
-
-        {
-          fields.map((detail, index) => (
-            <div
-              key={detail}
-              className={'d-flex flex-wrap w-100'}
-              role={'group'}
-              aria-labelledby={`section7__header--${index}`}
-              data-testid={`detail-${index}`}
-            >
-              <h4 id={`section7__header--${index}`} className={'col-md-12'}>{`Request #${index + 1}`}</h4>
-
-              <FieldRadioButtons {...this.withNamePrefix(detail, schema.orderType)} className={'col-md-8'} inline />
-              <FieldDate {...this.withNamePrefix(detail, schema.serviceDate)} className={'col-md-4'} />
-
-              <FieldInput {...this.withNamePrefix(detail, schema.quantity)} className={'col-md-4'} />
-              <FieldInput {...this.withNamePrefix(detail, schema.recurringCost)} className={'col-md-4'} />
-              <FieldInput {...this.withNamePrefix(detail, schema.nonRecurringCost)} className={'col-md-4'} />
-
-              <FieldInput {...this.withNamePrefix(detail, schema.stateContractNumber)} className={'col-md-4'} />
-              <FieldInput {...this.withNamePrefix(detail, schema.featureId)} className={'col-md-4'} />
-              <FieldInput {...this.withNamePrefix(detail, schema.billingAccount)} className={'col-md-4'} />
-
-              <FieldInput {...this.withNamePrefix(detail, schema.orderDescription)} className={'col-md-12'} />
-
-              <FieldInput {...this.withNamePrefix(detail, schema.orderComment)} className={'col-md-12'} />
-
-              <div className={'col-md-12'}>
-                <Button
-                  text={`Remove Request #${index + 1}`}
-                  variant={'default'}
-                  className={'float-right d-print-none'}
-                  iconProps={{ name: 'close-line' }}
-                  onClick={() => fields.remove(index)}
-                />
-              </div>
-
-              {index !== fields.length - 1 && <div className={'col-md-12'}><hr /></div>}
-            </div>
-          ))
-        }
+        <ul>
+          {fields.map((field, index) => (
+            this.renderVisitor(fields, field, index)
+          ))}
+        </ul>
       </div>
     );
   }
@@ -82,7 +80,7 @@ class Visitors extends React.Component {
   render() {
     return (
       <FieldArray
-        name={schema.orderDetails.name}
+        name={visitors.name}
         component={this.renderVisitors}
       />
     );

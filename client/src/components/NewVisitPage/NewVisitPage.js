@@ -7,12 +7,14 @@ import {
   history,
 } from 'state-template';
 
-
 import VisitForm from '../VisitForm';
+
+import fakeVisits from '../Visits/fakeVisits';
 
 export class NewVisitPage extends React.Component {
   onSubmit = (values) => {
     alert(JSON.stringify(values, null, 2));
+    console.log(values);
   }
 
   onCancel = () => {
@@ -46,11 +48,15 @@ export class NewVisitPage extends React.Component {
   )
 
   render() {
+    // const initialValues = {};
+    const initialValues = fakeVisits[1];
+
     return (
       <Page title={'New Visit'}>
         <ConnectedAsync>
 
           <VisitForm
+            initialValues={initialValues}
             renderMenu={this.renderMenu}
             onSubmit={this.onSubmit}
           />

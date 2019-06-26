@@ -18,6 +18,7 @@ export default [
     companyName: 'ryans awesome org',
     visitReason: 'reason for visiting...',
     specialInstructions: 'instructions..',
+    visitors: [],
   },
   {
     id: '53dbf504-438b-4139-aa39-1958c708aee5',
@@ -38,5 +39,17 @@ export default [
     companyName: 'ryans awesome org',
     visitReason: 'reason for visiting...',
     specialInstructions: 'instructions..',
+    visitors: [
+      {
+        badgeType: 'sticky',
+        securedArea: 'custodial',
+        visitorName: 'visitor-1',
+      },
+      {
+        badgeType: 'badge',
+        securedArea: 'none',
+        visitorName: 'visitor-2',
+      },
+    ],
   },
 ];

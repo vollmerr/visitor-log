@@ -1,4 +1,4 @@
-export const columns = [
+const columns = [
   {
     sort: true,
     dataField: 'status',
@@ -35,3 +35,5 @@ export const columns = [
     maxWidth: 250,
   },
 ];
+
+export default columns;

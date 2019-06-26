@@ -9,6 +9,7 @@ import {
 
 import schema from '../Visits/schema';
 
+import Visitors from './Visitors';
 
 export class VisitForm extends React.Component {
   renderMenu = (className) => {
@@ -69,9 +70,7 @@ export class VisitForm extends React.Component {
           <FieldInput {...schema.specialInstructions} className={'full-width'} disabled={disabled} />
         </div>
 
-        <div>
-          Visitors...
-        </div>
+        <Visitors disabled={disabled} />
 
         {renderMenu && <div className={'m-t-md'} />}
         {renderMenu && renderMenu()}

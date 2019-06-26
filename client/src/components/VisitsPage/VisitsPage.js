@@ -10,7 +10,7 @@ import {
 } from 'state-template';
 
 import fakeVisits from '../Visits/fakeVisits';
-import { columns } from '../Visits/data';
+import columns from '../Visits/columns';
 
 import Filters from './Filters';
 

@@ -1,6 +1,3 @@
-import React from 'react';
-import { A, normalize } from 'state-template';
-
 const schema = {
   id: {
     name: 'id',
@@ -99,8 +96,7 @@ const schema = {
   companyName: {
     required: true,
     name: 'companyName',
-    label: 'Compnay Name',
-    tag: 'textarea',
+    label: 'Company Name',
   },
   visitReason: {
     required: true,
@@ -109,10 +105,41 @@ const schema = {
     tag: 'textarea',
   },
   specialInstructions: {
-    required: true,
     name: 'specialInstructions',
     label: 'Special Instructions',
     tag: 'textarea',
+  },
+  visitors: {
+    name: 'visitors',
+    visitorNumber: {
+      name: 'visitorNumber',
+      label: 'Visitor Number',
+    },
+    visitorName: {
+      required: true,
+      name: 'visitorName',
+      label: 'Visitor Name',
+    },
+    securedArea: {
+      name: 'securedArea',
+      label: 'Secured Area',
+      options: [
+        { value: 'none', label: 'None' },
+        { value: 'custodial', label: 'Custodial' },
+        { value: 'tmsBasic', label: 'TMS Basic' },
+        { value: 'tmsPremium', label: 'TMS Premium' },
+        { value: 'vendor', label: 'Vendor' },
+      ],
+    },
+    badgeType: {
+      required: true,
+      name: 'badgeType',
+      label: 'Badge Type',
+      options: [
+        { value: 'badge', label: 'Badge' },
+        { value: 'sticky', label: 'Sticky' },
+      ],
+    },
   },
 };
 
